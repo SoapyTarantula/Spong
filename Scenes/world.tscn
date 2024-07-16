@@ -1,0 +1,75 @@
+[gd_scene load_steps=10 format=3 uid="uid://bytso4kww7vuk"]
+
+[ext_resource type="Script" path="res://Scripts/world.gd" id="1_dq3tk"]
+[ext_resource type="PackedScene" uid="uid://15jvjqchx2oj" path="res://Scenes/paddle.tscn" id="1_n2xgb"]
+[ext_resource type="PackedScene" uid="uid://dtx81rxq5jm8r" path="res://Scenes/wall.tscn" id="2_03wfh"]
+[ext_resource type="PackedScene" uid="uid://ivwwi0qdwuav" path="res://Scenes/ball.tscn" id="4_8agug"]
+[ext_resource type="PackedScene" uid="uid://b527ufe46nw3k" path="res://Scenes/opponent.tscn" id="5_nfo8f"]
+[ext_resource type="AudioStream" uid="uid://cmyi0e2dhuvyq" path="res://Sounds/player.ogg" id="6_kmdu5"]
+[ext_resource type="AudioStream" uid="uid://3xuw1j52pdva" path="res://Sounds/opponent.ogg" id="7_4gppx"]
+[ext_resource type="PackedScene" uid="uid://ms5fdvmm85p4" path="res://Scenes/interface.tscn" id="9_c0n7s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a5wwm"]
+size = Vector2(1360, 20)
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_dq3tk")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1280.0
+offset_bottom = 720.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.154006, 0.13009, 0.223884, 1)
+
+[node name="Paddle" parent="." instance=ExtResource("1_n2xgb")]
+unique_name_in_owner = true
+position = Vector2(640, 640)
+
+[node name="WallLeft" parent="." instance=ExtResource("2_03wfh")]
+position = Vector2(-40, 1)
+
+[node name="WallRight" parent="." instance=ExtResource("2_03wfh")]
+position = Vector2(1153, 0)
+
+[node name="Opponent" parent="." instance=ExtResource("5_nfo8f")]
+
+[node name="Ball" parent="." instance=ExtResource("4_8agug")]
+unique_name_in_owner = true
+position = Vector2(640, 320)
+
+[node name="Bounds" type="Node" parent="."]
+
+[node name="Top" type="Area2D" parent="Bounds"]
+unique_name_in_owner = true
+position = Vector2(640, -40)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/Top"]
+shape = SubResource("RectangleShape2D_a5wwm")
+
+[node name="Bottom" type="Area2D" parent="Bounds"]
+unique_name_in_owner = true
+position = Vector2(640, 690)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/Bottom"]
+shape = SubResource("RectangleShape2D_a5wwm")
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="paddleScored" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("6_kmdu5")
+volume_db = -12.0
+
+[node name="opponentScored" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("7_4gppx")
+volume_db = -12.0
+
+[node name="Control" parent="." instance=ExtResource("9_c0n7s")]
+
+[connection signal="area_entered" from="Bounds/Top" to="." method="_on_top_area_entered"]
+[connection signal="area_entered" from="Bounds/Bottom" to="." method="_on_bottom_area_entered"]

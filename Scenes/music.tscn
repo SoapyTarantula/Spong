@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://brt4ba7cfbjlf"]
+
+[ext_resource type="AudioStream" uid="uid://bi07huchwt1kr" path="res://Sounds/main.ogg" id="1_fomrg"]
+[ext_resource type="Script" path="res://Scripts/music.gd" id="2_p2g5n"]
+
+[node name="music" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_fomrg")
+volume_db = -18.0
+script = ExtResource("2_p2g5n")

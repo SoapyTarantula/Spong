@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://ivwwi0qdwuav"]
+
+[ext_resource type="Script" path="res://Scripts/ball.gd" id="1_6yjld"]
+[ext_resource type="AudioStream" uid="uid://wa5iy1yi3yb6" path="res://Sounds/ball.ogg" id="2_165i3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ju2vk"]
+size = Vector2(40, 40)
+
+[sub_resource type="Gradient" id="Gradient_hn2bp"]
+interpolation_color_space = 1
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.4, 0.4, 0.4, 1, 0, 0, 0, 0)
+
+[node name="Ball" type="CharacterBody2D" groups=["Ball"]]
+collision_mask = 7
+motion_mode = 1
+wall_min_slide_angle = 0.785398
+script = ExtResource("1_6yjld")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ju2vk")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_ju2vk")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 1
+z_as_relative = false
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+
+[node name="hitSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_165i3")
+volume_db = -12.0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 15
+lifetime = 0.5
+gravity = Vector2(0, 0)
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+color_ramp = SubResource("Gradient_hn2bp")

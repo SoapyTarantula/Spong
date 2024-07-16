@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://ms5fdvmm85p4"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_top = 320.0
+offset_right = 207.0
+offset_bottom = 412.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "A / D to move left & right
+
+Arrows or Q /  E to rotate.
+Spacebar to reset rotation.
+
+Escape or Tab to return to
+the menu.
+"
+fit_content = true
+autowrap_mode = 0
