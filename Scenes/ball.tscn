@@ -1,10 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://ivwwi0qdwuav"]
+[gd_scene load_steps=6 format=3 uid="uid://ivwwi0qdwuav"]
 
 [ext_resource type="Script" path="res://Scripts/ball.gd" id="1_6yjld"]
 [ext_resource type="AudioStream" uid="uid://wa5iy1yi3yb6" path="res://Sounds/ball.ogg" id="2_165i3"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ju2vk"]
-size = Vector2(40, 40)
+[sub_resource type="CircleShape2D" id="CircleShape2D_cr7ln"]
+radius = 21.0238
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u1ck0"]
+radius = 21.0238
 
 [sub_resource type="Gradient" id="Gradient_hn2bp"]
 interpolation_color_space = 1
@@ -18,12 +21,12 @@ wall_min_slide_angle = 0.785398
 script = ExtResource("1_6yjld")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_ju2vk")
+shape = SubResource("CircleShape2D_cr7ln")
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_ju2vk")
+shape = SubResource("CircleShape2D_u1ck0")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = 1
